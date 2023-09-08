@@ -1,33 +1,59 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 /**
- * main - Entry point of the program
+ * main - Prints the last digit of a randomly generated number
+ * and whether it is greater than 5, less than 6, or 0.
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+	int n;
+
+	srand(time(0));
+	n = rand() - RAND_MAX / 2;
+
+	if ((n % 10) > 5)
+	{
+		printf("Last digit of %d is %d and is greater than 5\n",
+			n, n % 10);
+	}
+	else if ((n % 10) < 6 && (n % 10) != 0)
+	{
+		printf("Last digit of %d is %d and is less than 6 and not 0\n",
+			n, n % 10);
+	}
+	else
+	{
+		printf("Last digit of %d is %d and is 0\n",
+			n, n % 10);
+	}
+
+	return (0);
+
+}
+
+
+2-print_alphabet.c
+
+#include <stdio.h>
+
+/**
+ * main - Prints the alphabet.
  *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-    int n;
+	char alp[26] = "abcdefghijklmnopqrstuvwxyz";
+	int i;
 
-    srand(time(0));  /* Seed the random number generator with the current time */
-    n = rand() - RAND_MAX / 2;  /* Assign a random number to n */
-
-    printf("The number %d is ", n);
-
-    if (n > 0)
-    {
-        printf("positive\n");
-    }
-    else if (n == 0)
-    {
-        printf("zero\n");
-    }
-    else
-    {
-        printf("negative\n");
-    }
-
-    return (0);
+	for (i = 0; i < 26; i++)
+	{
+		putchar(alp[i]);
+	}
+	putchar('\n');
+	return (0);
 }

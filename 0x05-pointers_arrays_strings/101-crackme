@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define PASSWORD_LENGTH
+
+// Function to generate a random character from a given character set
+char generate_random_char(const char *charset, int charset_length) {
+    int random_index = rand() % charset_length;
+    return charset[random_index];
+}
+
+// Function to generate a random valid password
+void generate_password(char *password, int length) {
+    const char uppercase_letters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const char lowercase_letters[] = "abcdefghijklmnopqrstuvwxyz";
+    const char digits[] = "0123456789";
+    const int uppercase_length = sizeof(uppercase_letters) - 1;
+    const int lowercase_length = sizeof(lowercase_letters) - 1;
+    const int digits_length = sizeof(digits) - 1;
+
+    for (int i = 0; i < length; i++) {
+        int choice = rand() % 3; // Randomly select uppercase, lowercase, or digit
+        switch (choice) {
+            case 0:
+                password[i] = generate_random_char(uppercase_letters, uppercase_length);
+                break;
+            case 1:
+                password[i] = generate_random_char(lowercase_letters, lowercase_length);
+                break;
+            case 2:
+                password[i] = generate_random_char(digits, digits_length);
+                break;
+        }
+    }
+    password[length] = '\0'; // Null-terminate the string
+}
+
+int main() {
+    srand(time(NULL)); // Seed the random number generator with the current time
+
+    char password[PASSWORD_LENGTH + 1]; // +1 for null terminator
+
+    generate_password(password, PASSWORD_LENGTH);
+    
+    printf("Generated Password: %s\n", password);
+
+    return 0;
+}
